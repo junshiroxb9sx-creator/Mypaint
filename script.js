@@ -1,4 +1,4 @@
-// MyPaint PC + Safari 対応版 script.js
+// MyPaint PC + iPad 対応版 script.js
 
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
@@ -72,7 +72,9 @@ function updateEraserCursorFromEvent(e) {
     eraserCursor.style.display = "block";
 }
 
-// マウスイベント
+/* -------------------------
+   マウスイベント（PC用）
+------------------------- */
 canvas.addEventListener("mousedown", (e) => {
     const pos = getPos(e);
     drawing = true;
@@ -100,10 +102,6 @@ canvas.addEventListener("mousemove", (e) => {
         eraseAt(pos.x, pos.y);
         updateEraserCursorFromEvent(e);
     } else {
-        if (lastX == null || lastY == null) {
-            lastX = pos.x;
-            lastY = pos.y;
-        }
         drawLine(lastX, lastY, pos.x, pos.y);
         lastX = pos.x;
         lastY = pos.y;
@@ -124,11 +122,14 @@ canvas.addEventListener("mouseleave", () => {
     eraserCursor.style.display = "none";
 });
 
-// タッチイベント（Safari / iPad / iPhone 用）
+/* -------------------------
+   タッチイベント（iPad用）
+------------------------- */
 canvas.addEventListener("touchstart", (e) => {
     e.preventDefault();
     const touch = e.touches[0];
     const pos = getPos(touch);
+
     drawing = true;
     saveHistory();
     lastX = pos.x;
@@ -151,10 +152,6 @@ canvas.addEventListener("touchmove", (e) => {
     if (erasing) {
         eraseAt(pos.x, pos.y);
     } else {
-        if (lastX == null || lastY == null) {
-            lastX = pos.x;
-            lastY = pos.y;
-        }
         drawLine(lastX, lastY, pos.x, pos.y);
         lastX = pos.x;
         lastY = pos.y;
@@ -167,13 +164,19 @@ canvas.addEventListener("touchend", () => {
     lastY = null;
 });
 
-// 色変更
+/* -------------------------
+   色変更（Safariでも四角表示）
+------------------------- */
+function updateCurrentColorBox() {
+    document.getElementById("currentColor").style.background = currentColor;
+}
+
 document.querySelectorAll(".color").forEach(btn => {
     btn.addEventListener("click", () => {
         currentColor = btn.dataset.color;
         erasing = false;
         eraserCursor.style.display = "none";
-        document.getElementById("currentColor").style.background = currentColor;
+        updateCurrentColorBox();
     });
 });
 
@@ -182,10 +185,12 @@ document.getElementById("colorPicker").addEventListener("input", (e) => {
     currentColor = e.target.value;
     erasing = false;
     eraserCursor.style.display = "none";
-    document.getElementById("currentColor").style.background = currentColor;
+    updateCurrentColorBox();
 });
 
-// ペン太さ
+/* -------------------------
+   ペン・消しゴム
+------------------------- */
 document.querySelectorAll(".penSize").forEach(btn => {
     btn.addEventListener("click", () => {
         penSize = Number(btn.dataset.size);
@@ -194,7 +199,6 @@ document.querySelectorAll(".penSize").forEach(btn => {
     });
 });
 
-// 消しゴム太さ
 document.querySelectorAll(".eraserSize").forEach(btn => {
     btn.addEventListener("click", () => {
         eraserSize = Number(btn.dataset.size);
@@ -202,46 +206,40 @@ document.querySelectorAll(".eraserSize").forEach(btn => {
     });
 });
 
-// ペンモード
 document.getElementById("penMode").addEventListener("click", () => {
     erasing = false;
     eraserCursor.style.display = "none";
 });
 
-// 消しゴムモード
 document.getElementById("eraserMode").addEventListener("click", () => {
     erasing = true;
 });
 
-// Undo
+/* -------------------------
+   Undo / Redo / 保存など
+------------------------- */
 document.getElementById("undo").addEventListener("click", () => {
     if (history.length === 0) return;
     redoStack.push(canvas.toDataURL());
-    const dataURL = history.pop();
-    restoreFromDataURL(dataURL);
+    restoreFromDataURL(history.pop());
 });
 
-// Redo
 document.getElementById("redo").addEventListener("click", () => {
     if (redoStack.length === 0) return;
     history.push(canvas.toDataURL());
-    const dataURL = redoStack.pop();
-    restoreFromDataURL(dataURL);
+    restoreFromDataURL(redoStack.pop());
 });
 
-// 全部消す
 document.getElementById("clear").addEventListener("click", () => {
     saveHistory();
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 });
 
-// PNG表示
 document.getElementById("png").addEventListener("click", () => {
     const url = canvas.toDataURL("image/png");
     window.open(url, "_blank");
 });
 
-// 作品保存
 document.getElementById("saveWork").addEventListener("click", () => {
     const name = prompt("作品名を入力してください");
     if (!name) return;
@@ -249,7 +247,6 @@ document.getElementById("saveWork").addEventListener("click", () => {
     updateWorkList();
 });
 
-// 作品一覧更新
 function updateWorkList() {
     const list = document.getElementById("workList");
     list.innerHTML = "<option value=''>保存作品を選択</option>";
@@ -267,15 +264,12 @@ function updateWorkList() {
 }
 updateWorkList();
 
-// 読込
 document.getElementById("loadWork").addEventListener("click", () => {
     const key = document.getElementById("workList").value;
     if (!key) return;
-    const dataURL = localStorage.getItem(key);
-    restoreFromDataURL(dataURL);
+    restoreFromDataURL(localStorage.getItem(key));
 });
 
-// 削除
 document.getElementById("deleteWork").addEventListener("click", () => {
     const key = document.getElementById("workList").value;
     if (!key) return;

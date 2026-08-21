@@ -1,11 +1,9 @@
 <!DOCTYPE html>
-<html lang="ja" manifest="mypaint.appcache">
+<html lang="ja">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <title>MyPaint</title>
-
-<link rel="stylesheet" href="style.css?v=9200">
 
 <style>
 #canvas {
@@ -36,7 +34,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    box-sizing: border-box;
 }
 .penSize span {
     width: 100%;
@@ -55,11 +52,19 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    box-sizing: border-box;
 }
 .eraserSize span {
     background: #ccc;
     border-radius: 50%;
+}
+
+/* 現在色（SafariでもPCと同じ四角表示） */
+#currentColor {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    border: 2px solid #444;
+    vertical-align: middle;
 }
 
 /* 消しゴムカーソル */
@@ -70,11 +75,6 @@
     border-radius: 50%;
     display: none;
 }
-
-button {
-    margin: 4px;
-    padding: 6px 10px;
-}
 </style>
 
 </head>
@@ -82,6 +82,7 @@ button {
 <div id="app">
 <h1>MyPaint</h1>
 
+<!-- 色パレット -->
 <div class="toolSection">
 <span class="toolTitle">色</span>
 <div id="palette">
@@ -99,13 +100,14 @@ button {
 <button class="color" data-color="#f19ec2" style="background:#f19ec2"></button>
 </div>
 
-<label class="customColor">自由色
+<label>自由色
 <input type="color" id="colorPicker" value="#000000">
 </label>
 
 <span>現在色</span><span id="currentColor"></span>
 </div>
 
+<!-- ペン太さ -->
 <div class="toolSection">
 <span class="toolTitle">ペンの太さ</span>
 
@@ -119,27 +121,21 @@ button {
 <button id="penMode">ペン</button>
 </div>
 
+<!-- 消しゴム太さ -->
 <div class="toolSection">
 <span class="toolTitle">消しゴムの太さ</span>
 
 <div class="eraserSizeRow">
-    <button class="eraserSize" data-size="10">
-        <span style="width:10px;height:10px;"></span>
-    </button>
-    <button class="eraserSize" data-size="20">
-        <span style="width:20px;height:20px;"></span>
-    </button>
-    <button class="eraserSize" data-size="40">
-        <span style="width:40px;height:40px;"></span>
-    </button>
-    <button class="eraserSize" data-size="80">
-        <span style="width:80px;height:80px;"></span>
-    </button>
+    <button class="eraserSize" data-size="10"><span style="width:10px;height:10px;"></span></button>
+    <button class="eraserSize" data-size="20"><span style="width:20px;height:20px;"></span></button>
+    <button class="eraserSize" data-size="40"><span style="width:40px;height:40px;"></span></button>
+    <button class="eraserSize" data-size="80"><span style="width:80px;height:80px;"></span></button>
 </div>
 
 <button id="eraserMode">消しゴム</button>
 </div>
 
+<!-- 操作ボタン -->
 <div class="toolSection actions">
 <button id="undo">元に戻す</button>
 <button id="redo">前に進む</button>
@@ -151,17 +147,16 @@ button {
 <button id="deleteWork">削除</button>
 </div>
 
-<div id="paperFrame">
+<!-- キャンバス -->
 <div id="canvasWrap" style="position:relative;">
 <canvas id="canvas" width="760" height="500"></canvas>
 <div id="eraserCursor"></div>
 </div>
+
+<p>ペンを選び、白い枠内に描いてください。</p>
+
 </div>
 
-<p id="message">ペンを選び、白い枠内に描いてください。</p>
-
-</div>
-
-<script src="script.js?v=9200"></script>
+<script src="script.js?v=9300"></script>
 </body>
 </html>
