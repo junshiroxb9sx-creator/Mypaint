@@ -5,15 +5,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <title>MyPaint</title>
 
-<link rel="stylesheet" href="style.css?v=9100">
+<link rel="stylesheet" href="style.css?v=9200">
 
 <style>
-/* キャンバス枠（あなたの希望どおり 5px のまま） */
 #canvas {
     border: 5px solid #000;
 }
 
-/* 色ボタン（変更なし） */
+/* 色ボタン */
 .color {
     width: 55px;
     height: 55px;
@@ -25,7 +24,7 @@
     border-width: 3px;
 }
 
-/* ★ ペン太さボタン：横一列に整列（display:flex を採用） */
+/* ペン太さボタン（横一列） */
 .penSizeRow {
     display: flex;
     gap: 6px;
@@ -44,7 +43,7 @@
     background: #000;
 }
 
-/* ★ 消しゴム太さボタン：横一列に整列＋正円に統一 */
+/* 消しゴム太さボタン（横一列・正円） */
 .eraserSizeRow {
     display: flex;
     gap: 6px;
@@ -60,10 +59,10 @@
 }
 .eraserSize span {
     background: #ccc;
-    border-radius: 50%; /* ← 正円に統一 */
+    border-radius: 50%;
 }
 
-/* 消しゴムカーソル（変更なし） */
+/* 消しゴムカーソル */
 #eraserCursor {
     position: absolute;
     pointer-events: none;
@@ -83,7 +82,6 @@ button {
 <div id="app">
 <h1>MyPaint</h1>
 
-<!-- 色パレット（変更なし） -->
 <div class="toolSection">
 <span class="toolTitle">色</span>
 <div id="palette">
@@ -108,7 +106,6 @@ button {
 <span>現在色</span><span id="currentColor"></span>
 </div>
 
-<!-- ★ ペン太さ（横一列に整列） -->
 <div class="toolSection">
 <span class="toolTitle">ペンの太さ</span>
 
@@ -122,7 +119,6 @@ button {
 <button id="penMode">ペン</button>
 </div>
 
-<!-- ★ 消しゴム太さ（横一列＋正円） -->
 <div class="toolSection">
 <span class="toolTitle">消しゴムの太さ</span>
 
@@ -130,15 +126,12 @@ button {
     <button class="eraserSize" data-size="10">
         <span style="width:10px;height:10px;"></span>
     </button>
-
     <button class="eraserSize" data-size="20">
         <span style="width:20px;height:20px;"></span>
     </button>
-
     <button class="eraserSize" data-size="40">
         <span style="width:40px;height:40px;"></span>
     </button>
-
     <button class="eraserSize" data-size="80">
         <span style="width:80px;height:80px;"></span>
     </button>
@@ -147,7 +140,6 @@ button {
 <button id="eraserMode">消しゴム</button>
 </div>
 
-<!-- 操作ボタン（変更なし） -->
 <div class="toolSection actions">
 <button id="undo">元に戻す</button>
 <button id="redo">前に進む</button>
@@ -159,7 +151,6 @@ button {
 <button id="deleteWork">削除</button>
 </div>
 
-<!-- キャンバス（変更なし） -->
 <div id="paperFrame">
 <div id="canvasWrap" style="position:relative;">
 <canvas id="canvas" width="760" height="500"></canvas>
@@ -171,6 +162,6 @@ button {
 
 </div>
 
-<script src="script.js?v=9100"></script>
+<script src="script.js?v=9200"></script>
 </body>
 </html>
