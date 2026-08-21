@@ -22,14 +22,6 @@ h1 {
   color:#174a73;
 }
 
-#toolbar {
-  margin:4px;
-  padding:5px;
-  background:#f8f8f8;
-  border:1px solid #999;
-  border-radius:6px;
-}
-
 .toolSection {
   margin:3px 0;
   padding:3px;
@@ -58,11 +50,6 @@ button {
   vertical-align:middle;
 }
 
-button.active {
-  border:4px solid #ff9900;
-  box-shadow:0 0 5px #ff9900;
-}
-
 #palette {
   display:inline;
 }
@@ -79,7 +66,7 @@ button.active {
   border-width:3px;
 }
 
-/* ★ 自由色の表示を PC と同じ四角に統一（Safariでも確実に見える） */
+/* ★ 自由色の表示を PC と同じ四角に統一 */
 #currentColor {
   display:inline-block;
   width:40px;
@@ -88,10 +75,6 @@ button.active {
   background:#000;
   border:2px solid #222;
   vertical-align:middle;
-}
-
-.customColor {
-  margin:0 8px;
 }
 
 .penSize {
@@ -120,15 +103,6 @@ button.active {
   border-radius:50%;
 }
 
-.actions button {
-  padding:5px 10px;
-}
-
-#workList {
-  min-height:40px;
-  max-width:220px;
-}
-
 #paperFrame {
   display:inline-block;
   max-width:96%;
@@ -146,14 +120,12 @@ button.active {
   margin:auto;
 }
 
-/* ★ iPadで描けない原因だった width/height を削除
-   ★ touch-action:none を残してタッチ描画を有効化 */
+/* ★ iOS 9.3.5 では CSS の width/height を使うと壊れるので禁止 */
 canvas {
   display:block;
   background:#fff;
   border:4px solid #555;
   box-sizing:border-box;
-  touch-action:none;   /* ← iPadで描けるようになる最重要設定 */
 }
 
 #eraserCursor {
@@ -164,26 +136,4 @@ canvas {
   pointer-events:none;
   z-index:10;
   box-sizing:border-box;
-}
-
-#message {
-  margin:4px;
-  font-size:14px;
-}
-
-@media (max-width:700px) {
-  .toolTitle {
-    display:block;
-    margin:auto;
-  }
-  button, select {
-    font-size:13px;
-  }
-  .eraserSize {
-    width:64px;
-    height:64px;
-  }
-  #paperFrame {
-    padding:8px;
-  }
 }
