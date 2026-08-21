@@ -1,0 +1,11 @@
+CACHE MANIFEST
+# MyPaint version 2.1.0 - 2026-08-21
+
+CACHE:
+./
+index.html
+style.css
+script.js
+
+NETWORK:
+*

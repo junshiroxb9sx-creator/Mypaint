@@ -1,0 +1,32 @@
+html, body { margin:0; padding:0; background:#dfe8ef; font-family:Arial,"Yu Gothic",sans-serif; }
+body { -webkit-user-select:none; user-select:none; }
+#app { max-width:1024px; margin:0 auto; text-align:center; }
+h1 { margin:4px 0; font-size:24px; color:#174a73; }
+#toolbar { margin:4px; padding:5px; background:#f8f8f8; border:1px solid #999; border-radius:6px; }
+.toolSection { margin:3px 0; padding:3px; border-bottom:1px solid #ddd; }
+.toolTitle { display:inline-block; min-width:95px; font-weight:bold; color:#174a73; }
+button, select, input { font-size:15px; }
+button { min-width:42px; min-height:40px; margin:2px; padding:4px; border:2px solid #777; border-radius:6px; background:#fff; vertical-align:middle; }
+button.active { border:4px solid #ff9900; box-shadow:0 0 5px #ff9900; }
+#palette { display:inline; }
+.color { width:60px; height:60px; min-width:60px; padding:0; }
+.color.white { border-color:#222; border-width:3px}
+#currentColor { display:inline-block; width:34px; height:28px; margin-left:4px; background:#000; border:2px solid #222; vertical-align:middle; }
+.customColor { margin:0 8px; }
+.penSize { width:70px; height:42px; }
+.penSize span { display:block; width:52px; margin:auto; background:#111; border-radius:8px; }
+.eraserSize { width:88px; height:88px; }
+.eraserSize span { display:block; margin:auto; background:#fff; border:2px solid #555; border-radius:50%; }
+.actions button { padding:5px 10px; }
+#workList { min-height:40px; max-width:220px; }
+#paperFrame { display:inline-block; max-width:96%; margin:8px auto; padding:14px; background:#c9c9c9; border:1px solid #888; box-shadow:0 3px 9px rgba(0,0,0,.25); }
+#canvasWrap { position:relative; width:760px; max-width:100%; margin:auto; }
+canvas { display:block; width:100%; height:auto; background:#fff; border:4px solid #555; box-sizing:border-box; touch-action:none; }
+#eraserCursor { position:absolute; display:none; border:2px solid #e60012; border-radius:50%; pointer-events:none; z-index:10; box-sizing:border-box; }
+#message { margin:4px; font-size:14px; }
+@media (max-width:700px) {
+  .toolTitle { display:block; margin:auto; }
+  button, select { font-size:13px; }
+  .eraserSize { width:64px; height:64px; }
+  #paperFrame { padding:8px; }
+}
